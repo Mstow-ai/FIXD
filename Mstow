@@ -1,317 +1,547 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sorted | Quality Services, Sorted</title>
-<meta name="description" content="Sorted connects homeowners with trusted, vetted service professionals. Quality work without the hassle." />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fixd — Every Job Done Right</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<style>
-:root {
-    --black: #000;
-    --gray-900: #1a1a1a;
-    --gray-600: #555;
-    --gray-400: #888;
-    --bg: #fafafa;
-    --card: #ffffff;
-    --radius-lg: 28px;
-    --radius-sm: 18px;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; overflow-x: hidden; }
-
-body {
-    font-family: 'Times New Roman', Times, serif;
-    background: var(--bg);
-    color: var(--gray-900);
-    line-height: 1.6;
-}
-
-/* ---------- HEADER ---------- */
-
-.header {
-    background: var(--card);
-    padding: 32px 18px 28px;
-}
-
-.brand {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-}
-
-/* Mobile stack */
-@media (max-width: 767px) {
-    .brand {
-        flex-direction: column;
-        text-align: center;
+    :root {
+      --ink:       #0F1923;
+      --ink-mid:   #182330;
+      --ink-soft:  #1E2D3D;
+      --steel:     #4A7FA5;
+      --steel-lt:  #6B9BBF;
+      --mist:      #C8DBE9;
+      --mist-lt:   #E8F2F8;
+      --fog:       #7A96AA;
+      --fog-lt:    #A8BEC9;
+      --white:     #F4F8FB;
+      --r:         16px;
+      --r-lg:      24px;
+      --r-xl:      36px;
     }
-}
 
-.logo {
-    font-size: 2.6rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-}
+    html { scroll-behavior: smooth; }
 
-.tagline {
-    margin-top: 8px;
-    font-size: 0.95rem;
-    color: var(--gray-600);
-}
-
-/* ---------- PRISM ---------- */
-
-.prism-container {
-    width: 120px;
-    height: 120px;
-    perspective: 1000px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Slightly smaller on mobile */
-@media (max-width: 767px) {
-    .prism-container {
-        width: 100px;
-        height: 100px;
-        margin-top: 12px;
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--ink);
+      color: var(--mist-lt);
+      overflow-x: hidden;
     }
-}
 
-.prism {
-    width: 80px;
-    height: 80px;
-    position: relative;
-    transform-style: preserve-3d;
-    animation: rotatePrism 8s infinite linear;
-}
-
-@keyframes rotatePrism {
-    0% { transform: rotateX(0deg) rotateY(0deg); }
-    100% { transform: rotateX(360deg) rotateY(360deg); }
-}
-
-/* Reduce motion load on small devices */
-@media (max-width: 767px) {
-    .prism {
-        animation-duration: 12s;
+    body::after {
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999;
     }
-}
 
-.prism-face {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #000 0%, #333 100%);
-    border: 2px solid #666;
-    opacity: 0.9;
-}
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 48px;
+      background: rgba(15,25,35,0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(74,127,165,0.1);
+    }
+    .nav-logo {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.55rem; font-weight: 600;
+      color: var(--white); text-decoration: none;
+      letter-spacing: -0.03em;
+    }
+    .nav-logo span { color: var(--steel-lt); }
+    .nav-cta {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--white); background: var(--steel);
+      padding: 11px 26px; border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--steel-lt); transform: translateY(-1px); }
 
-.prism-face:nth-child(1) { transform: rotateY(0deg) translateZ(40px); }
-.prism-face:nth-child(2) { transform: rotateY(90deg) translateZ(40px); }
-.prism-face:nth-child(3) { transform: rotateY(180deg) translateZ(40px); }
-.prism-face:nth-child(4) { transform: rotateY(-90deg) translateZ(40px); }
-.prism-face:nth-child(5) { transform: rotateX(90deg) translateZ(40px); }
-.prism-face:nth-child(6) { transform: rotateX(-90deg) translateZ(40px); }
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 140px 60px 100px;
+      position: relative; overflow: hidden;
+    }
+    .hero-blob {
+      position: absolute; top: -10%; right: -5%;
+      width: 65vw; height: 65vw; border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(74,127,165,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      animation: blobDrift 12s ease-in-out infinite alternate;
+    }
+    .hero-blob2 {
+      position: absolute; bottom: 0; left: -10%;
+      width: 40vw; height: 40vw; border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(74,127,165,0.09) 0%, transparent 70%);
+      pointer-events: none;
+      animation: blobDrift 18s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes blobDrift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(3%,4%) scale(1.04); }
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 740px; }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(74,127,165,0.15);
+      border: 1px solid rgba(74,127,165,0.3);
+      border-radius: 100px; padding: 8px 18px;
+      margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-pill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--steel-lt); animation: pulse 2s infinite;
+    }
+    .hero-pill span {
+      font-size: 0.7rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--steel-lt); font-weight: 600;
+    }
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      font-weight: 400; line-height: 1.08; color: var(--white);
+      margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .hero h1 em { font-style: italic; color: var(--steel-lt); }
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 300; line-height: 1.85;
+      color: var(--fog-lt); max-width: 500px; margin-bottom: 52px;
+      opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+    }
+    .btn-primary {
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em;
+      color: var(--white); background: var(--steel);
+      padding: 16px 36px; border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 8px 32px rgba(74,127,165,0.3);
+    }
+    .btn-primary:hover { background: var(--steel-lt); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(74,127,165,0.4); }
+    .btn-ghost {
+      font-size: 0.82rem; font-weight: 400; color: var(--fog-lt);
+      text-decoration: none; padding: 16px 28px; border-radius: 100px;
+      border: 1px solid rgba(74,127,165,0.25);
+      display: flex; align-items: center; gap: 8px;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-ghost:hover { border-color: var(--steel-lt); color: var(--mist-lt); }
 
-/* ---------- CTA ---------- */
+    /* TRUST */
+    .trust {
+      display: flex;
+      border-top: 1px solid rgba(74,127,165,0.12);
+      border-bottom: 1px solid rgba(74,127,165,0.12);
+    }
+    .trust-item {
+      flex: 1; padding: 32px 36px;
+      border-right: 1px solid rgba(74,127,165,0.12);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .trust-text strong { display: block; font-size: 0.83rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+    .trust-text span { font-size: 0.73rem; color: var(--fog); font-weight: 300; }
 
-.hero-cta {
-    margin-top: 26px;
-}
+    /* SECTION LABEL */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--steel-lt); margin-bottom: 18px;
+    }
+    .section-label::before {
+      content:''; display: block; width: 22px; height: 1.5px;
+      border-radius: 2px; background: var(--steel);
+    }
 
-.hero-cta button {
-    width: 100%;
-    padding: 18px;
-    font-size: 1rem;
-    border-radius: 50px;
-    border: none;
-    background: var(--black);
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-}
+    /* PROMISE */
+    .promise {
+      padding: 110px 60px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .promise-left h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400; line-height: 1.2; color: var(--white); margin-bottom: 20px;
+    }
+    .promise-left h2 em { font-style: italic; color: var(--steel-lt); }
+    .promise-left p { font-size: 0.93rem; line-height: 1.9; color: var(--fog-lt); font-weight: 300; }
+    .promise-cards { display: flex; flex-direction: column; gap: 12px; }
+    .p-card {
+      background: var(--ink-soft); border-radius: var(--r-lg);
+      padding: 28px 32px; display: flex; align-items: flex-start; gap: 18px;
+      border: 1px solid rgba(74,127,165,0.1);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .p-card:hover { border-color: rgba(74,127,165,0.35); transform: translateX(5px); }
+    .p-card-icon {
+      font-size: 1.4rem; flex-shrink: 0;
+      width: 50px; height: 50px;
+      background: rgba(74,127,165,0.12); border-radius: var(--r);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .p-card-body h3 { font-size: 0.97rem; font-weight: 600; color: var(--white); margin-bottom: 5px; }
+    .p-card-body p { font-size: 0.8rem; line-height: 1.65; color: var(--fog); font-weight: 300; }
 
-/* ---------- ABOUT ---------- */
+    /* GUARANTEE */
+    .guarantee { padding: 110px 60px; background: var(--ink-mid); }
+    .guarantee-head { text-align: center; margin-bottom: 60px; }
+    .guarantee-head h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      font-weight: 400; line-height: 1.15; color: var(--white); margin-bottom: 14px;
+    }
+    .guarantee-head h2 em { font-style: italic; color: var(--steel-lt); }
+    .guarantee-head p { font-size: 0.93rem; line-height: 1.8; color: var(--fog-lt); max-width: 460px; margin: 0 auto; font-weight: 300; }
+    .guarantee-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; max-width: 840px; margin: 0 auto;
+    }
+    .g-card { border-radius: var(--r-xl); padding: 52px 44px; position: relative; overflow: hidden; }
+    .g-card-best { background: var(--steel); }
+    .g-card-save { background: var(--ink-soft); border: 1px solid rgba(74,127,165,0.2); }
+    .g-card-num {
+      font-family: 'Lora', serif; font-size: 4.5rem; font-weight: 400;
+      line-height: 1; margin-bottom: 20px; display: block;
+    }
+    .g-card-best .g-card-num { color: rgba(255,255,255,0.18); }
+    .g-card-save .g-card-num { color: rgba(74,127,165,0.18); }
+    .g-card-tag {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .g-card-best .g-card-tag { color: rgba(255,255,255,0.65); }
+    .g-card-save .g-card-tag { color: var(--steel-lt); }
+    .g-card h3 { font-family: 'Lora', serif; font-size: 1.65rem; font-weight: 600; line-height: 1.2; margin-bottom: 12px; }
+    .g-card-best h3 { color: #fff; }
+    .g-card-save h3 { color: var(--white); }
+    .g-card p { font-size: 0.86rem; line-height: 1.8; font-weight: 300; }
+    .g-card-best p { color: rgba(255,255,255,0.72); }
+    .g-card-save p { color: var(--fog-lt); }
 
-.about {
-    background: var(--card);
-    margin: 24px 16px;
-    padding: 36px 24px;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-    text-align: center;
-}
+    /* SERVICES */
+    .services { padding: 110px 60px; }
+    .services-head { margin-bottom: 52px; }
+    .services-head h2 { font-family: 'Lora', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; color: var(--white); margin-top: 6px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .svc {
+      background: var(--ink-soft); border-radius: var(--r-lg);
+      padding: 38px 32px; border: 1px solid rgba(74,127,165,0.08);
+      transition: border-color 0.3s, transform 0.3s, background 0.3s;
+    }
+    .svc:hover { border-color: rgba(74,127,165,0.3); background: #1e2d3d; transform: translateY(-4px); }
+    .svc-num { font-size: 0.63rem; font-weight: 600; letter-spacing: 0.15em; color: var(--steel); margin-bottom: 18px; }
+    .svc-icon { font-size: 1.7rem; margin-bottom: 16px; }
+    .svc h3 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 9px; }
+    .svc p { font-size: 0.8rem; line-height: 1.75; color: var(--fog); font-weight: 300; }
 
-.about h2 {
-    font-size: 1.5rem;
-    margin-bottom: 18px;
-}
+    /* FORM */
+    .form-section { padding: 110px 60px; background: var(--ink-mid); }
+    .form-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 90px; align-items: start; }
+    .form-intro h2 { font-family: 'Lora', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.2; color: var(--white); margin-bottom: 18px; }
+    .form-intro h2 em { font-style: italic; color: var(--steel-lt); }
+    .form-intro p { font-size: 0.9rem; line-height: 1.9; color: var(--fog-lt); font-weight: 300; margin-bottom: 32px; }
+    .guarantee-note {
+      background: rgba(74,127,165,0.1); border: 1px solid rgba(74,127,165,0.25);
+      border-radius: var(--r-lg); padding: 22px 26px;
+    }
+    .guarantee-note p { font-size: 0.82rem; line-height: 1.7; color: var(--mist); margin: 0; font-weight: 300; }
+    .guarantee-note strong { color: var(--steel-lt); font-weight: 600; }
+    .form-card {
+      background: var(--ink-soft); border-radius: var(--r-xl);
+      padding: 44px 40px; border: 1px solid rgba(74,127,165,0.12);
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 11px; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+    .f-field { display: flex; flex-direction: column; gap: 6px; }
+    .f-field label { font-size: 0.63rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel-lt); padding-left: 2px; }
+    .f-field input, .f-field select, .f-field textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(74,127,165,0.18);
+      border-radius: var(--r);
+      padding: 13px 16px;
+      color: var(--white);
+      font-family: 'Sora', sans-serif;
+      font-size: 0.88rem; font-weight: 300;
+      outline: none;
+      transition: border-color 0.25s, background 0.25s;
+      -webkit-appearance: none;
+    }
+    .f-field input::placeholder, .f-field textarea::placeholder { color: var(--fog); }
+    .f-field input:focus, .f-field select:focus, .f-field textarea:focus {
+      border-color: var(--steel); background: rgba(74,127,165,0.06);
+    }
+    .f-field select { cursor: pointer; color: var(--fog); }
+    .f-field select.chosen { color: var(--white); }
+    .f-field select option { background: var(--ink-soft); color: var(--white); }
+    .f-field textarea { resize: none; min-height: 126px; line-height: 1.7; }
+    .form-btn {
+      margin-top: 4px; width: 100%;
+      background: var(--steel); border: none; border-radius: 100px;
+      padding: 16px 40px;
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em;
+      color: var(--white); cursor: pointer;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 8px 28px rgba(74,127,165,0.25);
+    }
+    .form-btn:hover { background: var(--steel-lt); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(74,127,165,0.35); }
+    .form-note { text-align: center; font-size: 0.72rem; color: var(--fog); font-weight: 300; margin-top: 8px; }
+    .form-success { display: none; text-align: center; padding: 56px 20px; }
+    .form-success.show { display: block; }
+    .form-success-icon { font-size: 2.6rem; margin-bottom: 18px; display: block; }
+    .form-success h3 { font-family: 'Lora', serif; font-size: 1.75rem; font-weight: 400; color: var(--steel-lt); margin-bottom: 10px; }
+    .form-success p { font-size: 0.87rem; color: var(--fog-lt); line-height: 1.7; }
 
-.about p {
-    font-size: 1rem;
-    color: var(--gray-600);
-    max-width: 720px;
-    margin: 0 auto;
-}
+    /* FOOTER */
+    footer {
+      padding: 44px 60px;
+      border-top: 1px solid rgba(74,127,165,0.12);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo { font-size: 1.3rem; font-weight: 600; color: var(--white); letter-spacing: -0.03em; }
+    .footer-logo span { color: var(--steel-lt); }
+    .footer-copy { font-size: 0.72rem; color: var(--fog); font-weight: 300; }
 
-.about p + p { margin-top: 14px; }
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.75); } }
+    .reveal { opacity:0; transform:translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
 
-/* ---------- FORM ---------- */
-
-.section {
-    margin: 40px 16px 90px;
-}
-
-.card {
-    background: var(--card);
-    padding: 36px 24px;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-}
-
-.card h1 {
-    font-size: 1.6rem;
-    text-align: center;
-}
-
-.subtitle {
-    margin-top: 6px;
-    text-align: center;
-    font-size: 0.95rem;
-    color: var(--gray-600);
-}
-
-form {
-    margin-top: 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 18px;
-    font-size: 16px;
-    border-radius: var(--radius-sm);
-    border: 2px solid #eee;
-    background: #fafafa;
-    font-family: inherit;
-}
-
-textarea {
-    min-height: 140px;
-    resize: vertical;
-}
-
-input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--black);
-    background: #fff;
-}
-
-.row {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-button.submit {
-    margin-top: 8px;
-    padding: 20px;
-    border-radius: 50px;
-    font-size: 1.05rem;
-    border: none;
-    background: var(--black);
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-/* ---------- FOOTER + STICKY ---------- */
-
-footer {
-    background: var(--card);
-    padding: 40px 16px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--gray-400);
-}
-
-.sticky-cta {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #fff;
-    padding: 14px;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.08);
-}
-
-.sticky-cta button {
-    width: 100%;
-    padding: 16px;
-    border-radius: 50px;
-    border: none;
-    background: var(--black);
-    color: #fff;
-    font-weight: 600;
-}
-
-/* ---------- DESKTOP ---------- */
-
-@media (min-width: 768px) {
-    .header { padding: 60px 5%; }
-    .logo { font-size: 5rem; letter-spacing: 8px; }
-    .tagline { font-size: 1.1rem; }
-    .hero-cta { display: none; }
-    .about { margin: 60px auto; padding: 60px; max-width: 900px; }
-    .section { max-width: 900px; margin: 0 auto 100px; }
-    .card { padding: 60px; }
-    .row { flex-direction: row; gap: 20px; }
-    .sticky-cta { display: none; }
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-}
-</style>
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .hero { padding: 120px 24px 80px; }
+      .trust { flex-direction: column; }
+      .trust-item { border-right: none; border-bottom: 1px solid rgba(74,127,165,0.12); }
+      .promise { grid-template-columns: 1fr; padding: 80px 24px; gap: 40px; }
+      .guarantee { padding: 80px 24px; }
+      .guarantee-cards { grid-template-columns: 1fr; }
+      .services { padding: 80px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .form-section { padding: 80px 24px; }
+      .form-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .f-row { grid-template-columns: 1fr; }
+      .form-card { padding: 28px 22px; }
+      footer { flex-direction: column; gap: 14px; text-align: center; padding: 32px 24px; }
+    }
+  </style>
 </head>
-
 <body>
 
-<header class="header">
-    <div class="brand">
-        <div>
-            <div class="logo">Sorted</div>
-            <div class="tagline">Quality services without the hassle</div>
+  <nav>
+    <a href="#" class="nav-logo">Fix<span>d</span></a>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-blob"></div>
+    <div class="hero-blob2"></div>
+    <div class="hero-content">
+      <div class="hero-pill">
+        <div class="hero-pill-dot"></div>
+        <span>All Trades · All Scales · One Team</span>
+      </div>
+      <h1>Whatever needs<br/><em>fixing,</em> we've<br/>got you covered.</h1>
+      <p class="hero-sub">Minor repairs, major builds, or anything in between — Fixd handles it all with honesty, skill, and a guarantee you'll actually appreciate.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Tell us what you need</a>
+        <a href="#services" class="btn-ghost">See what we do &nbsp;→</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust">
+    <div class="trust-item">
+      <div class="trust-icon">⚡</div>
+      <div class="trust-text"><strong>Fast Response</strong><span>We reply within 1 business day</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🛡️</div>
+      <div class="trust-text"><strong>Fully Licensed</strong><span>Insured tradespeople only</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">✌️</div>
+      <div class="trust-text"><strong>Two Options Guaranteed</strong><span>Best solution & budget-friendly</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">📍</div>
+      <div class="trust-text"><strong>Local Experts</strong><span>Tradespeople in your area</span></div>
+    </div>
+  </div>
+
+  <!-- PROMISE -->
+  <section class="promise">
+    <div class="promise-left reveal">
+      <div class="section-label">How We Work</div>
+      <h2>Honest work.<br/><em>Real results.</em></h2>
+      <p>We don't overcomplicate things. You tell us the problem, we assess it properly, and we come back with a clear plan. No hidden costs, no jargon — just straightforward trades done well.</p>
+    </div>
+    <div class="promise-cards">
+      <div class="p-card reveal">
+        <div class="p-card-icon">🔧</div>
+        <div class="p-card-body"><h3>Minor Repairs & Fixes</h3><p>Leaks, cracks, fittings — quick jobs done properly the first time.</p></div>
+      </div>
+      <div class="p-card reveal">
+        <div class="p-card-icon">🏗️</div>
+        <div class="p-card-body"><h3>Big Projects</h3><p>Full renovations and builds, managed end-to-end with complete transparency.</p></div>
+      </div>
+      <div class="p-card reveal">
+        <div class="p-card-icon">👷</div>
+        <div class="p-card-body"><h3>All Trades Labour</h3><p>Plumbing, electrical, carpentry, tiling — skilled hands for every job.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE -->
+  <section class="guarantee">
+    <div class="guarantee-head reveal">
+      <div class="section-label" style="justify-content:center; display:flex;">Our Promise</div>
+      <h2>You'll always get<br/><em>two options.</em></h2>
+      <p>We believe you should always have a choice. Every single enquiry comes back with two tailored quotes — no exceptions.</p>
+    </div>
+    <div class="guarantee-cards">
+      <div class="g-card g-card-best reveal">
+        <span class="g-card-num">01</span>
+        <div class="g-card-tag">⭐ Our Recommendation</div>
+        <h3>The Best Way to Do It</h3>
+        <p>The solution we'd choose if it were our own home. Premium materials, best-practice methods, built to last for decades. This is what we're proud to put our name on.</p>
+      </div>
+      <div class="g-card g-card-save reveal">
+        <span class="g-card-num">02</span>
+        <div class="g-card-tag">💰 Budget Option</div>
+        <h3>The Smart Saver</h3>
+        <p>A cost-conscious alternative that still meets our quality standards. A different approach, same commitment — just easier on your wallet. You're always in control.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-head reveal">
+      <div class="section-label">What We Do</div>
+      <h2>Every trade.<br/>Every scale.</h2>
+    </div>
+    <div class="services-grid">
+      <div class="svc reveal"><div class="svc-num">01</div><div class="svc-icon">🪛</div><h3>Handyman & Minor Repairs</h3><p>No job too small. We take the small stuff seriously because the details add up.</p></div>
+      <div class="svc reveal"><div class="svc-num">02</div><div class="svc-icon">🚿</div><h3>Plumbing</h3><p>Burst pipes to full bathroom fit-outs. Licensed plumbers for any scale of work.</p></div>
+      <div class="svc reveal"><div class="svc-num">03</div><div class="svc-icon">⚡</div><h3>Electrical</h3><p>Safe, certified work — power points, lighting, switchboards and full rewires.</p></div>
+      <div class="svc reveal"><div class="svc-num">04</div><div class="svc-icon">🪚</div><h3>Carpentry & Joinery</h3><p>Custom cabinetry, decking, framing, doors and windows — built to last.</p></div>
+      <div class="svc reveal"><div class="svc-num">05</div><div class="svc-icon">🏠</div><h3>Renovations & Extensions</h3><p>Full project management for kitchens, bathrooms, and whole-home transformations.</p></div>
+      <div class="svc reveal"><div class="svc-num">06</div><div class="svc-icon">🧱</div><h3>Construction & Builds</h3><p>New builds, structural changes, major construction — on time and to spec.</p></div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section" id="contact">
+    <div class="form-wrap">
+      <div class="form-intro reveal">
+        <div class="section-label">Get in Touch</div>
+        <h2>Tell us what<br/><em>needs doing.</em></h2>
+        <p>Describe your job — big or small. We'll come back with two options so you can choose what works best for you.</p>
+        <div class="guarantee-note">
+          <p><strong>Guaranteed two quotes:</strong> every enquiry gets our best-practice recommendation and a budget-friendly alternative. You decide.</p>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <div class="form-success" id="formSuccess">
+          <span class="form-success-icon">✦</span>
+          <h3>You're all set.</h3>
+          <p>We've received your enquiry and will be in touch within 1 business day with your two tailored options.</p>
         </div>
 
-        <div class="prism-container">
-            <div class="prism">
-                <div class="prism-face"></div>
-                <div class="prism-face"></div>
-                <div class="prism-face"></div>
-                <div class="prism-face"></div>
-                <div class="prism-face"></div>
-                <div class="prism-face"></div>
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpwlnogj" method="POST">
+          <div class="f-row">
+            <div class="f-field">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required/>
             </div>
-        </div>
+            <div class="f-field">
+              <label for="location">Location / Suburb</label>
+              <input type="text" id="location" name="location" placeholder="e.g. Richmond, VIC" required/>
+            </div>
+          </div>
+          <div class="f-row">
+            <div class="f-field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com"/>
+            </div>
+            <div class="f-field">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="04XX XXX XXX"/>
+            </div>
+          </div>
+          <div class="f-field">
+            <label for="jobtype">Type of Job</label>
+            <select id="jobtype" name="job_type" required onchange="this.classList.add('chosen')">
+              <option value="" disabled selected>Select a category</option>
+              <option>Minor Repair / Handyman</option>
+              <option>Plumbing</option>
+              <option>Electrical</option>
+              <option>Carpentry &amp; Joinery</option>
+              <option>Renovation / Extension</option>
+              <option>New Build / Construction</option>
+              <option>Other / Not Sure</option>
+            </select>
+          </div>
+          <div class="f-field">
+            <label for="message">Describe Your Job</label>
+            <textarea id="message" name="message" placeholder="Tell us as much as you can — what needs doing, your timeline, and any budget considerations..." required></textarea>
+          </div>
+          <button type="submit" class="form-btn">Send My Enquiry →</button>
+          <p class="form-note">We respond to all enquiries within 1 business day.</p>
+        </form>
+      </div>
     </div>
+  </section>
 
-    <div class="hero-cta">
-        <button onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">
-            Request a service
-        </button>
-    </div>
-</header>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Fix<span>d</span></div>
+    <div class="footer-copy">© 2025 Fixd. All rights reserved.</div>
+  </footer>
 
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 55);
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.form-btn');
+      btn.textContent = 'Sending…'; btn.disabled = true;
+      try {
+        const res = await fetch(form.action, { method:'POST', body: new FormData(form), headers:{ 'Accept':'application/json' } });
+        if (res.ok) { form.style.display='none'; success.classList.add('show'); }
+        else { btn.textContent='Something went wrong — try again'; btn.disabled=false; }
+      } catch { btn.textContent='Something went wrong — try again'; btn.disabled=false; }
+    });
+  </script>
 </body>
 </html>
